@@ -1,4 +1,6 @@
 # Anomaly_Detection
-Anomaly Detection in Images
+Visual Anomaly Detection
 
-Partial source code uploaded. Full code will be made available upon the acceptance of the paper #Fast Anomaly Detection for Vision-Based Industrial Inspection Using Cascades of Null Subspace PCA Detectors
+2025 - Bilal, M.; Hanif, M.S. Fast Anomaly Detection for Vision-Based Industrial Inspection Using Cascades of Null Subspace PCA Detectors. Sensors 2025, 25, 4853. https://doi.org/10.3390/s25154853  
+
+2026 - Bilal, M. Lean GLASS (submitted)

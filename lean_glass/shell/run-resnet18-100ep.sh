@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# 100-epoch ResNet18-GLASS baseline (faithful: layer2+layer3, NO gate).
+# Matches the GLASS paper's light backbone (lit. img 99.1/px 98.0/PRO 94.7 @640ep).
+# Run at SAME schedule as your model for the in-house comparison;
+# landing near 99.1 also validates the pipeline reproduces GLASS.
+# layer2 is /8 -> --downsampling 8.
+datapath=/content/mvtec_anomaly_detection
+augpath=/content/dtd/images
+
+python main.py \
+    --gpu 0 \
+    --seed 0 \
+    --test ckpt \
+    --run_name resnet18_100ep \
+  net \
+    -b resnet18 \
+    -le layer2 \
+    -le layer3 \
+    --pretrain_embed_dimension 1536 \
+    --target_embed_dimension 1536 \
+    --patchsize 3 \
+    --meta_epochs 100 \
+    --eval_epochs 1 \
+    --dsc_layers 2 \
+    --dsc_hidden 1024 \
+    --pre_proj 1 \
+    --mining 1 \
+    --noise 0.015 \
+    --radius 0.75 \
+    --p 0.5 \
+    --step 20 \
+    --limit 392 \
+    --gate 0 \
+  dataset \
+    --distribution 0 \
+    --mean 0.5 \
+    --std 0.1 \
+    --fg 1 \
+    --rand_aug 1 \
+    --downsampling 8 \
+    --batch_size 8 \
+    --num_workers 4 \
+    --resize 288 \
+    --imagesize 288 \
+    -d carpet -d grid -d leather -d tile -d wood -d bottle -d cable -d capsule \
+    -d hazelnut -d metal_nut -d pill -d screw -d toothbrush -d transistor -d zipper \
+    mvtec $datapath $augpath
